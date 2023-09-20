@@ -1,5 +1,5 @@
-const express = require('express');
-const axios = require('axios');
+const express = require('express'); // Import the express library
+const axios = require('axios'); // Import the axios library
 const cors = require('cors');  // Import the cors library
 const app = express();
 const PORT = 8080;
