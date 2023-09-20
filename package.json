@@ -1,0 +1,12 @@
+{
+  "devDependencies": {
+    "concurrently": "^8.2.1"
+  },
+  "scripts": {
+      "dev:frontend": "cd client && npm run dev", 
+      "dev:express": "cd server/express_service && node server.js",
+      "dev:fastapi": "uvicorn server.fastapi_service.main:app --reload",
+      "dev:backend": "concurrently \"npm run dev:express\" \"npm run dev:fastapi\"",
+      "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:express\" \"npm run dev:fastapi\""   
+  }  
+}

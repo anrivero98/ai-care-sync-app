@@ -1,5 +1,6 @@
-import React, {useEffect, useState} from 'react'
-
+import React, { useEffect, useState } from 'react';
+import FastAPIChecker from './api/FastAPIChecker';  // Import the FastAPIChecker component
+import ServerStatusChecker from './api/ServerStatusChecker';
 
 interface DataObject {
   name: string;
@@ -8,10 +9,8 @@ interface DataObject {
 type DataType = DataObject[] | DataObject | null;
 
 function Index() {
+  const [data, setData] = useState<DataType>(null);
 
-  const [data, setData] = useState<DataType>(null); // Add the appropriate type if you know the structure of your data
-
-  // useEffect hook for making the API call
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -25,26 +24,31 @@ function Index() {
 
     fetchData();
 
-    // Optional cleanup
     return () => {
-      // Perform cleanup here, if needed
+      // Optional cleanup
     };
   }, []);
 
-  // Component rendering logic
   return (
     <div>
-    {data ? (  // Check if data exists
-      Array.isArray(data) ? (  // If data exists, check if it's an array
-        data.map(item => <div key={item.name}>Name: {item.name}</div>)
+      <h1>Main Component</h1>
+      {data ? (
+        Array.isArray(data) ? (
+          data.map(item => <div key={item.name}>Name: {item.name}</div>)
+        ) : (
+          <div>Name: {data.name}</div>
+        )
       ) : (
-        <div>Name: {data.name}</div>
-      )
-    ) : (
-      <p>Loading...</p>  // Default message if data doesn't exist
-    )}
-  </div>
+        <p>Loading...</p>
+      )}
+      {/* <hr />
+      <h2>FastAPI Checker</h2>
+      <FastAPIChecker /> */}
+      <hr />
+      <h2>Server Status</h2>
+      <ServerStatusChecker />
+    </div>
   );
 }
 
-export default Index
+export default Index;

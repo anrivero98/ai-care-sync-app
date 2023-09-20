@@ -9,14 +9,23 @@ app.use(cors());
 
 app.use(express.json());
 
-app.get("/api/home", async (req, res) => {
+app.get('/fetch-status', async (req, res) => {
     try {
-        const fastAPIResponse = await axios.get('http://127.0.0.1:8000/fastapi-endpoint');
-        res.json({ 
+        const fastAPIResponse = await axios.get('http://127.0.0.1:8000/status');
+
+        // Construct the response object
+        const responseObject = { 
             message: "Hello World from Express!",
             fastAPI: fastAPIResponse.data
-        });
+        };
+
+        // Print the response object to the console
+        console.log("Express:", responseObject);
+
+        // Send the response object to the client
+        res.json(responseObject);
     } catch (error) {
+        console.error("Error fetching data from FastAPI:", error);
         res.status(500).json({ error: "Error fetching data from FastAPI" });
     }
 });
