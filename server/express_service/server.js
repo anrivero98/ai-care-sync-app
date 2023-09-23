@@ -30,6 +30,8 @@ app.get('/fetch-status', async (req, res) => {
     }
 });
 
+// writing some comments so I can update the git
+
 app.listen(PORT, () => {
     console.log(`Server started on port ${PORT}`);
 });
