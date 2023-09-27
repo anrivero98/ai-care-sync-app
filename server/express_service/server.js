@@ -1,3 +1,4 @@
+require("dotenv").config({ debug: true });
 const express = require("express"); // Import the express library
 const axios = require("axios"); // Import the axios library
 const cors = require("cors"); // Import the cors library
@@ -34,6 +35,7 @@ app.get("/fetch-status", async (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
+  console.log("ZM_SDK_KEY:", process.env.ZM_SDK_KEY);
 });
 
 module.exports = app;
