@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import MeetingStyles from "../src/styles/zoom.module.css";
 import router from "next/router";
-
+import middleWare from "../middleware";
 const axios = require("axios");
 
 const Meeting = () => {
@@ -24,7 +24,7 @@ const Meeting = () => {
 
           let payload = router.query;
           const { data } = await axios({
-            url: "/api/Zoom",
+            url: middleWare,
             method: "post",
             data: payload,
           });

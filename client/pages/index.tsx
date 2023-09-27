@@ -41,9 +41,6 @@ function Index() {
       ) : (
         <p>Loading...</p>
       )}
-      {/* <hr />
-      <h2>FastAPI Checker</h2>
-      <FastAPIChecker /> */}
       <hr />
       <h2>Server Status</h2>
       <ServerStatusChecker />
