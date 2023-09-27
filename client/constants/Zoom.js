@@ -1,12 +1,15 @@
-require("dotenv").config();
+const dotenv = require("dotenv");
+dotenv.config({ path: "../.env" });
 
-const ZOOM = {
-  SDK: {
-    KEY: process.env.ZM_SDK_KEY,
-    SECRET: process.env.ZM_SECRET_KEY,
-  },
-};
+// Rest of the code...
+// console.log(process.env.ZM_SDK_KEY);
+// console.log(process.env.ZM_SECRET_KEY);
 
 module.exports = {
-  ZOOM,
+  ZOOM: {
+    SDK: {
+      KEY: process.env.ZM_SDK_KEY,
+      SECRET: process.env.ZM_SECRET_KEY,
+    },
+  },
 };

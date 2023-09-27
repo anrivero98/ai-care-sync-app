@@ -1,48 +1,47 @@
 import { useEffect } from "react";
 import MeetingStyles from "../src/styles/zoom.module.css";
-import router from "next/router";
+import { useRouter } from "next/router";
 
 const axios = require("axios");
 
 const Meeting = () => {
+  const router = useRouter();
+
   useEffect(() => {
-    return async () => {
-      new Promise(async (resolve, reject) => {
-        const ZoomEmbed = await (
-          await import("@zoomus/websdk/embedded")
-        ).default;
+    if (!router.isReady) return;
 
-        resolve(ZoomEmbed.createClient());
-      })
-        .then(async (client) => {
-          let meetingSDKElement = document.getElementById("meetingSDKElement");
+    const fetchData = async () => {
+      try {
+        const ZoomEmbed = (await import("@zoomus/websdk/embedded")).default;
+        const client = ZoomEmbed.createClient();
 
-          client.init({
-            language: "en-US",
-            zoomAppRoot: meetingSDKElement,
-          });
-
-          let payload = router.query;
-
-          const { data } = await axios({
-            url: "/api/Zoom",
-            method: "post",
-            data: payload,
-          });
-
-          client.join({
-            meetingNumber: payload.meetingNumber,
-            signature: data.signature,
-            sdkKey: data.sdkKey,
-            userName: payload.userName,
-            tk: "",
-          });
-        })
-        .catch((error) => {
-          console.log(`Error: ${error}`);
+        let meetingSDKElement = document.getElementById("meetingSDKElement");
+        client.init({
+          language: "en-US",
+          zoomAppRoot: meetingSDKElement,
         });
+
+        let payload = router.query;
+        const { data } = await axios({
+          url: "/api/Zoom",
+          method: "post",
+          data: payload,
+        });
+
+        client.join({
+          meetingNumber: payload.meetingNumber,
+          signature: data.signature,
+          sdkKey: data.sdkKey,
+          userName: payload.userName,
+          tk: "",
+        });
+      } catch (error) {
+        console.log(`Error: ${error}`);
+      }
     };
-  }, []);
+
+    fetchData();
+  }, [router.isReady]);
   return (
     <div className={MeetingStyles.container}>
       <div
