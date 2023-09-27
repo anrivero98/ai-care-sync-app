@@ -15,8 +15,8 @@ export default function handler(req, res) {
     exp: exp,
   };
 
-  const sHeader = JSON.stringify(oHeader);
-  const sPayload = JSON.stringify(oPayload);
+  const sHeader = JSON.stringify(Headers);
+  const sPayload = JSON.stringify(Payload);
 
   signature = KJUR.jws.JWS.sign("HS256", sHeader, sPayload, sdkSecret);
 
