@@ -1,12 +1,11 @@
 const KJUR = require("jsrsasign");
-require('dotenv').config();
+require("dotenv").config();
 
 const middleware = {};
 
 middleware.generateToken = (req, res, next) => {
-
   try {
-    let signature = '';
+    let signature = "";
     const iat = Math.round(new Date().getTime() / 1000);
     const exp = iat + 60 * 60 * 2;
 
@@ -34,8 +33,7 @@ middleware.generateToken = (req, res, next) => {
 
     res.locals.signature = signature;
     return next();
-  }
-  catch (err) {
+  } catch (err) {
     return next({ err });
   }
 };
