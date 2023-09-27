@@ -17,6 +17,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/zoom.js", "pages/zoom.js", "pages/zoom.jsx"],
   "exclude": ["node_modules"]
 }
