@@ -18,7 +18,7 @@ export default function handler(req, res) {
   const sHeader = JSON.stringify(Headers);
   const sPayload = JSON.stringify(Payload);
 
-  signature = KJUR.jws.JWS.sign("HS256", sHeader, sPayload, sdkSecret);
+  signature = KJUR.jws.JWS.sign("HS256", sHeader, sPayload, ZOOM.SDK.SECRET);
 
   return res.join({
     signature: signature,
