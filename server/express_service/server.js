@@ -4,16 +4,10 @@ const cors = require("cors"); // Import the cors library
 const app = express();
 const PORT = 8080;
 
-const middleware = require("./middleware"); // Import the middleware
-
 // Use the cors middleware (you can customize this further if needed)
 app.use(cors());
 
 app.use(express.json());
-
-app.post("/generate", middleware.generateToken, (req, res) => {
-  res.status(200).send(res.locals.signature);
-});
 
 app.get("/fetch-status", async (req, res) => {
   try {
