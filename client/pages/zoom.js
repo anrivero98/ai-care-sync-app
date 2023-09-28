@@ -33,6 +33,7 @@ const Meeting = () => {
           signature: data.signature,
           sdkKey: data.sdkKey,
           userName: payload.userName,
+          password: payload.password,
           tk: "",
         });
       } catch (error) {
@@ -41,7 +42,7 @@ const Meeting = () => {
     };
 
     fetchData();
-  }, [router.isReady]);
+  }, [router.isReady, router.query]);
   return (
     <div className={MeetingStyles.container}>
       <div

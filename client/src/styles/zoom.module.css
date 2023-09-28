@@ -13,3 +13,7 @@
 .content{
     width: 75%;
 }
+
+.meetingSDKElement > div {
+    align-self: center;
+}
