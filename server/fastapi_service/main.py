@@ -5,7 +5,7 @@ app = FastAPI()
 
 # Set up CORS
 origins = [
-    "http://localhost:3000",  # Allow local development originy
+    "http://localhost:3001",  # Allow local development originy
     # "https://yourfrontend.com",  # Add production origins as needed
 ]
 
@@ -17,9 +17,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 @app.get("/fastapi-endpoint")
 def read_root():
     return {"Hello": "from FastAPI"}
+
 
 @app.get("/status")
 def get_status():
