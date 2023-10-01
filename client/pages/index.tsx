@@ -14,9 +14,9 @@ function Index() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/hello');
-        const result = await response.json();
-        setData(result);
+        // const response = await fetch('http://localhost:3000/api/hello');
+        // const result = await response.json();
+        // setData(result);
       } catch (error) {
         console.error(error);
       }

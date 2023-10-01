@@ -14,7 +14,7 @@ const Meeting = () => {
       try {
         const ZoomEmbed = (await import("@zoomus/websdk/embedded")).default;
         const client = ZoomEmbed.createClient();
-
+        
         let meetingSDKElement = document.getElementById("meetingSDKElement");
         client.init({
           language: "en-US",
@@ -28,19 +28,23 @@ const Meeting = () => {
           data: payload,
         });
 
+        console.log("HMM")
+        console.log(data)
+
         client.join({
           meetingNumber: payload.meetingNumber,
           signature: data.signature,
           sdkKey: data.sdkKey,
           userName: payload.userName,
-          password: payload.password,
+          passWord: payload.password,
           tk: "",
         });
+        
       } catch (error) {
         console.log(`Error: ${error}`);
       }
     };
-
+    
     fetchData();
   }, [router.isReady, router.query]);
   return (

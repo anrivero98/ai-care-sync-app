@@ -1,3 +1,6 @@
+const dotenv = require("dotenv");
+dotenv.config({ path: "../.env" });
+
 const config = process.env;
 const deps = [
   "ZM_CLIENT_ID",
