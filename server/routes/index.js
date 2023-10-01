@@ -1,4 +1,5 @@
 import express from "express";
+const express = require("express");
 import { handleError, sanitize } from "../helpers/routing.js";
 import { contextHeader, getAppContext } from "../helpers/cipher.js";
 import { getInstallURL } from "../helpers/zoom-api.js";

@@ -1,5 +1,5 @@
 const KJUR = require("jsrsasign");
-require("dotenv").config();
+require("dotenv").config({ path: "/.env" });
 
 const middleware = {};
 

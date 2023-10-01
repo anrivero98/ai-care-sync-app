@@ -1,8 +1,13 @@
-import axios from "axios";
-import { URL } from "url";
-import { zoomApp } from "../../config.js";
-import createError from "http-errors";
-import crypto from "crypto";
+// import axios from "axios";
+const axios = require("axios");
+// import { URL } from "url";
+const { URL } = require("url");
+// import { zoomApp } from "../../config.js";
+const { zoomApp } = require("../config");
+// import createError from "http-errors";
+const createError = require("http-errors");
+// import crypto from "crypto";
+const crypto = require("crypto");
 
 // returns a base64 encoded url
 const base64URL = (s) =>
@@ -69,7 +74,7 @@ function apiRequest(method, endpoint, token, data = null) {
  * Return the url, state and verifier for the Zoom App Install
  * @return {{verifier: string, state: string, url: module:url.URL}}
  */
-export function getInstallURL() {
+function getInstallURL() {
   const state = rand("base64");
   const verifier = rand("ascii");
 
@@ -89,7 +94,7 @@ export function getInstallURL() {
   url.searchParams.set("code_challenge", challenge);
   url.searchParams.set("code_challenge_method", "S256");
   url.searchParams.set("state", state);
-
+  console.log("state", state);
   return { url, state, verifier };
 }
 
@@ -99,7 +104,7 @@ export function getInstallURL() {
  * @param verifier - code_verifier for PKCE
  * @return {Promise}  Promise resolving to the access token object
  */
-export async function getToken(code, verifier) {
+async function getToken(code, verifier) {
   if (!code || typeof code !== "string")
     throw createError(500, "authorization code must be a valid string");
 
@@ -119,7 +124,7 @@ export async function getToken(code, verifier) {
  * @param {string} token - Refresh token to use
  * @return {Promise<void>}
  */
-export async function refreshToken(token) {
+async function refreshToken(token) {
   if (!token || typeof token !== "string")
     throw createError(500, "refresh token must be a valid string");
 
@@ -134,7 +139,7 @@ export async function refreshToken(token) {
  * @param {string} uid - User ID to query on
  * @param {string} token Zoom App Access Token
  */
-export function getZoomUser(uid, token) {
+function getZoomUser(uid, token) {
   return apiRequest("GET", `/users/${uid}`, token);
 }
 
@@ -143,7 +148,7 @@ export function getZoomUser(uid, token) {
  * @param {string} token - Zoom App Access Token
  * @return {Promise}
  */
-export function getDeeplink(token) {
+function getDeeplink(token) {
   return apiRequest("POST", "/zoomapp/deeplink", token, {
     action: JSON.stringify({
       url: "/",
@@ -153,3 +158,11 @@ export function getDeeplink(token) {
     }),
   }).then((data) => Promise.resolve(data.deeplink));
 }
+
+module.exports = {
+  getInstallURL,
+  getToken,
+  refreshToken,
+  getZoomUser,
+  getDeeplink,
+};

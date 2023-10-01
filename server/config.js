@@ -6,7 +6,7 @@ const deps = [
   "SESSION_SECRET",
 ];
 
-export const zoomApp = {
+const zoomApp = {
   host: config.ZM_HOST || "https://zoom.us",
   clientId: config.ZM_CLIENT_ID,
   clientSecret: config.ZM_CLIENT_SECRET,
@@ -15,15 +15,16 @@ export const zoomApp = {
 };
 
 // Zoom App Info
-export const appName = config.APP_NAME || "zoom-app";
-export const redirectUri = zoomApp.redirectUrl;
+const appName = config.APP_NAME || "zoom-app";
+const redirectUri = zoomApp.redirectUrl;
 
 // HTTP
-export const port = config.PORT || "3000";
+const port = config.PORT || "3000";
 
-// require secrets are explicitly imported
-export default {
+module.exports = {
   appName,
   redirectUri,
   port,
+  zoomApp,
+  deps,
 };
