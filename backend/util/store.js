@@ -11,7 +11,9 @@ const util = require('util')
  */
 
 const db = redis.createClient({
-  url: process.env.REDIS_URL,
+  host: 'redis-12572.c92.us-east-1-3.ec2.cloud.redislabs.com',
+  port: 12572,
+  password: "Z3ZEs0sZOPAwK4SsLw4NUMVV4dtv5YN4"
 })
 
 const getAsync = util.promisify(db.get).bind(db)
