@@ -1,11 +1,10 @@
 const path = require('path')
 
 require('dotenv').config({
-  path: path.join(__dirname, `.env${process.env.NODE_ENV}`),
+  path: '.env',
 })
 
-require('dotenv').config()
-
+console.log(process.env)
 const envars = [
   'PORT',
   'SESSION_SECRET',
