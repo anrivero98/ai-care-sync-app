@@ -5,7 +5,7 @@ Requirements:
 
 ### Start your TunnelMole (reverse proxy)
 
-Zoom Apps do not support localhost, and must be served over https.  To develop locally, you need to tunnel traffic to this application via https, because the application runs in Docker containers serving traffic from `http://localhost`. You can use Ngrok to do this. Once installed you may run this command from your terminal:
+Zoom Apps do not support localhost, and must be served over https.  To develop locally, you need to tunnel traffic to this application via https, because the application runs in Docker containers serving traffic from `http://localhost`. You can use tmole to do this. Once installed you may run this command from your terminal:
 
 ```bash
 tmole 3000 as https://ai-sync-care-front.tunnelmole.net
@@ -26,7 +26,7 @@ docker-compose up
 ### Install the app
 
 Before proceeding, make sure to:
-  - Log in to zoom.us on the web (if not already signed in there)
+  - Log in to zoom.us on the web (if not already signed in there); Use a NON-UCSC Account
   - Make sure the user matches the user you've used to log in to the Zoom client 
   - While developing, make sure the user is in the developer account
 
