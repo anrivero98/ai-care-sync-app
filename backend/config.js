@@ -4,7 +4,6 @@ require('dotenv').config({
   path: '.env',
 })
 
-console.log(process.env)
 const envars = [
   'PORT',
   'SESSION_SECRET',

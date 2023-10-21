@@ -8,6 +8,7 @@
     "start": "node --inspect=0.0.0.0 server.js"
   },
   "dependencies": {
+    "@zoom/videosdk": "^1.9.0",
     "axios": "^1.0.2",
     "base64url": "^3.0.1",
     "connect-redis": "^5.1.0",
