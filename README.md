@@ -3,6 +3,7 @@ Requirements:
 - Docker
 - Ngrok (https://ngrok.com/download)
 
+
 ### Start your Ngrok (reverse proxy)
 
 Zoom Apps do not support localhost, and must be served over https.  To develop locally, you need to tunnel traffic to this application via https, because the application runs in Docker containers serving traffic from `http://localhost`. You can use ngrok to do this. Once installed you may run this command from your terminal:

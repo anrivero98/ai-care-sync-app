@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { Router, Routes } from "react-router-dom";
 import "./index.css";
 import App from "./App";
+import MainComponent from "./mainComponent";
 import reportWebVitals from "./reportWebVitals";
 import { createHashHistory } from "history";
 import { useLocation, useHistory } from "react-router-dom";
@@ -75,16 +76,12 @@ ReactDOM.render(
   <React.StrictMode>
     <Router history={history}>
       {/* <App /> */}
-      <TestApp />
+      <MainComponent />
     </Router>
   </React.StrictMode>,
   document.getElementById("root")
 );
 
-
-function TestApp() {
-
-  useEffect(() => {
 
 
 
@@ -121,17 +118,7 @@ function TestApp() {
     // })
 
 
-  });
 
-
-  
-
-  return (
-
-      <RecordView />
-   
-  )
-}
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
