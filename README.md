@@ -1,17 +1,17 @@
 Requirements:
 
 - Docker
-- Tunnelmole (https://github.com/robbie-cahill/tunnelmole-client)
+- Ngrok (https://ngrok.com/download)
 
-### Start your TunnelMole (reverse proxy)
+### Start your Ngrok (reverse proxy)
 
-Zoom Apps do not support localhost, and must be served over https.  To develop locally, you need to tunnel traffic to this application via https, because the application runs in Docker containers serving traffic from `http://localhost`. You can use tmole to do this. Once installed you may run this command from your terminal:
+Zoom Apps do not support localhost, and must be served over https.  To develop locally, you need to tunnel traffic to this application via https, because the application runs in Docker containers serving traffic from `http://localhost`. You can use ngrok to do this. Once installed you may run this command from your terminal:
 
 ```bash
-tmole 3000 as https://ai-sync-care-front.tunnelmole.net
+./ngrok http --domain=verified-comic-marten.ngrok-free.app 3000
 ```
 
-tunnelmole will output the origin it has created for your tunnel, eg `https://ai-sync-care-front.tunnelmole.net`.
+ngrok will output the origin it has created for your ngrok, eg `https://verified-comic-marten.ngrok-free.app`.
 Please copy the https origin from the Ngrok terminal output and paste it in the `PUBLIC_URL` value in the `.env` file.
 
 ### Run Application
@@ -33,7 +33,7 @@ Before proceeding, make sure to:
 To install your app and open it the Zoom client's embedded browser, visit:
 
 ```
-https://ai-sync-care-front.tunnelmole.net/api/zoomapp/install
+https://verified-comic-marten.ngrok-free.app/api/zoomapp/install
 ```
 
 #### Database
