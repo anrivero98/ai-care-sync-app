@@ -9,8 +9,17 @@ import { createHashHistory } from "history";
 import { useLocation, useHistory } from "react-router-dom";
 import {useEffect } from 'react'
 import ZoomVideo from '@zoom/videosdk'
-
 import { useReactMediaRecorder } from "react-media-recorder";
+
+var constraints = { audio: true }
+
+
+navigator.mediaDevices.getUserMedia(constraints)
+.then((stream) => {
+    var audioContext = new AudioContext();
+    // ... rest of code
+})
+
 
 const RecordView = () => {
   const { status, startRecording, stopRecording, mediaBlobUrl } =
@@ -77,6 +86,7 @@ ReactDOM.render(
     <Router history={history}>
       {/* <App /> */}
       <MainComponent />
+      {/* <TestApp /> */}
     </Router>
   </React.StrictMode>,
   document.getElementById("root")
@@ -84,38 +94,53 @@ ReactDOM.render(
 
 
 
+function TestApp() {
 
-    // let stream
-    // client.init('en-US', 'CDN').then(() => {
+  useEffect(() => {
+    let stream
+    client.init('en-US', 'CDN').then(() => {
 
-    //   console.log("INit")
+      console.log("INit")
 
-    //   // const stream = zmClient.getMediaStream();
+      const stream = client.getMediaStream();
       
-    //   client.join('test-meeting', generateSignature('ajro4ZZIRrmT2-TXVbzpxQ', 'HSjsexLP9uiSDPg98cwpUbm1ZpvBFYixiuSc', 'test-meeting', 1, 'sessionKeyRandom', 'jesh'), 'jesh').then(() => {
-    //     try {
-    //       stream = client.getMediaStream()
-    //       console.log(stream)
-    //       client.on(`caption-message`, (payload) => {
-    //         console.log(payload)
-    //         console.log(`${payload.displayName} said: ${payload.text}`);
-    //       });
-    //       const liveTranscriptionTranslation = client.getLiveTranscriptionClient()
-    //       liveTranscriptionTranslation.startLiveTranscription();
+      client.join('test-meeting', generateSignature('ajro4ZZIRrmT2-TXVbzpxQ', 'HSjsexLP9uiSDPg98cwpUbm1ZpvBFYixiuSc', 'test-meeting', 1, 'sessionKeyRandom', 'jesh'), 'jesh').then(() => {
+        try {
           
-    //     }
-    //     catch(err) {
+          // stream = client.getMediaStream()
+          const liveTranscriptionTranslation = client.getLiveTranscriptionClient()
+          liveTranscriptionTranslation.startLiveTranscription();
+          client.on(`caption-message`, (payload) => {
+            console.log("SUCCESS")
+            console.log(payload)
+            console.log(`${payload.displayName} said: ${payload.text}`);
+          });
           
-    //     }
+        }
+        catch(err) {
+          
+        }
 
         
-    //   }).catch((error) => {
-    //     console.log(error)
-    //   })
+      }).catch((error) => {
+        console.log(error)
+      })
 
-    // }).catch((error) => {
-    //   console.log(error)
-    // })
+    }).catch((error) => {
+      console.log(error)
+    })
+
+  })
+  return (
+    <div>
+      <h2>Hello</h2>
+    </div>
+  )
+
+}
+
+
+
 
 
 
