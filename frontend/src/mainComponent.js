@@ -6,6 +6,8 @@ import Grid from '@mui/material/Grid';
 import { styled } from "@mui/material/styles";
 import Container from '@mui/material/Container';
 
+import Chat from './components/chat'
+
 
 
 
@@ -20,19 +22,16 @@ function MainComponent() {
   function MainContainerView() {
     
     return (
+        
     <Grid container >
 
-    <Grid item sx={{ bgcolor: 'black', width: '70vw', height: '100vh', paddingLeft: 0, paddingRight: 0 }}>
-        <Container   
-            // TODO - put a zoom video running here
-        />
+    <Grid item sx={{ bgcolor: 'black', width: '60vw', height: '100vh', paddingLeft: 0, paddingRight: 0 }}>
+        Test
     </Grid>
 
-    <Grid item sx={{ bgcolor: 'white',  width: '30vw', height: '100vh', paddingLeft: 0, paddingRight: 0 }} >
-        <Container 
-        
-            // TODO - Build UI for Zoom App Here
-        />
+    <Grid item sx={{ bgcolor: 'grey',  width: '40vw', height: '100vh', paddingLeft: 0, paddingRight: 0 }} >
+        <Chat />
+
     </Grid>
         
     </Grid>
