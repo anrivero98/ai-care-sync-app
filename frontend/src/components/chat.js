@@ -4,13 +4,9 @@ import "material-icons/iconfont/material-icons.css";
 import ChatAI from "./chatAITile";
 import React from "react";
 
-function Chat() {
-  let text = [
-    "Hey there! I'm CareSync, your AI sidekick. I'm here to help you get the most out of your appointment. I'll keep track of the conversation, highlight important words, take notes, and even suggest relevant questions to ask the doctor!",
-    "You can ask me anything about what's been discussed in the appointment so far, or about general knowledge.",
-    "Nothing much, you?",
-    "nah im just chillin",
-  ];
+function Chat({ chatList }) {
+  
+
   return (
     <div className={styles.chatWindow}>
       <div className={styles.iconContainer}>
@@ -46,7 +42,7 @@ function Chat() {
         <div className={styles.tab}>Transcript</div>
         <div className={styles.tab}>Smart Notes</div>
       </div>
-      {text.map((text) => (
+      {chatList.speechList.map((text) => (
         <ChatAI text={text} />
       ))}
     </div>
