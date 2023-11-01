@@ -14,13 +14,6 @@ import { useReactMediaRecorder } from "react-media-recorder";
 var constraints = { audio: true }
 
 
-navigator.mediaDevices.getUserMedia(constraints)
-.then((stream) => {
-    var audioContext = new AudioContext();
-    // ... rest of code
-})
-
-
 const RecordView = () => {
   const { status, startRecording, stopRecording, mediaBlobUrl } =
     useReactMediaRecorder({ audio: true });
