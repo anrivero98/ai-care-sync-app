@@ -4,7 +4,7 @@ import "material-icons/iconfont/material-icons.css";
 import ChatAI from "./chatAITile";
 import React from "react";
 
-function Chat({ chatList }) {
+function transcript({ chatList }) {
   
 
   return (

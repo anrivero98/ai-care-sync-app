@@ -107,7 +107,7 @@ function MainComponent() {
     </Grid>
 
     <Grid item sx={{ bgcolor: 'grey',  width: '40vw', height: '100vh', paddingLeft: 0, paddingRight: 0 }} >
-        <Chat chatList={{speechList}} />
+        <Chat />
 
     </Grid>
         
