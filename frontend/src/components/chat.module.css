@@ -102,3 +102,13 @@ line-height: 22px;
     overflow-y: scroll;
     
   }
+
+  /*Styling question tile buttons */
+  .buttonContainer {
+    white-space: nowrap; /* Prevents buttons from wrapping to the next line */
+    overflow-x: auto; /* Enables horizontal scrolling if necessary */
+    margin-left: 125px;
+    margin-top: 10px;
+    padding-bottom: 5px;
+  }
+  

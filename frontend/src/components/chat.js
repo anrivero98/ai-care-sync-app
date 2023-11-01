@@ -3,6 +3,26 @@ import React, { useState } from 'react';
 import { ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
 import "material-icons/iconfont/material-icons.css";
 import ChatAI from "./chatAITile";
+import {Button } from '@mui/material';
+
+
+//example questions until reach questions are ported over
+const questions = [
+  "How long is my appointment?",
+  "When should I meet with you?",
+  
+]
+
+const buttonStyle = {
+    display: 'inline-block', // Keep the button side by side
+    marginRight: '10px', 
+    borderRadius: '20px', // Adjusting the border radius to control the roundness
+    color: '#2196F3', // Blue text color
+    backgroundColor: '#FFFFFF', // White background color
+    textTransform: 'none', 
+    padding: '10px 20px', 
+};
+
 
 function Chat() {
 
@@ -68,10 +88,24 @@ function Chat() {
       </ToggleButtonGroup>
 
       {selectedOption && (
-        <Typography variant="body1" style={{ marginTop: '20px' }}>
-          {selectedOption === 'option1' && <div>{text.map((text) => (
-        <ChatAI text={text} />
-      ))}</div>}
+  <Typography variant="body1" style={{ marginTop: '20px' }}>
+    {selectedOption === 'option1' && (
+      <div>
+        {text.map((text, index) => (
+          <div key={index}>
+            <ChatAI text={text} />
+          </div>
+        ))}
+        <div style={{ marginRight: '250px' }}>Try asking me...</div>
+        <div className={styles.buttonContainer}>
+          {questions.map((question, index) => (
+            <Button key={index} variant="contained" style={buttonStyle}>
+              {question}
+            </Button>
+          ))}
+        </div>
+      </div>
+    )}
           {selectedOption === 'option2' && 'Text for Transcript is displayed.'}
           {selectedOption === 'option3' && 'Text for Smart Notes is displayed.'}
         </Typography>
