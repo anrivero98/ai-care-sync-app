@@ -1,4 +1,4 @@
-const SYSTEM_PROMPT = "I will show you a running conversation between a doctor and a patient. You are a virtual assistant for the patient. Your job is to suggest follow-up questions that the patient should ask the doctor.  Please make sure the questions are brief and concise and can be quickly read and understood by the patient. Please restrict yourself to 2-3 questions. Return the questions as an array in javascript called questions. Do not say anything else"
+const SYSTEM_PROMPT = "I will show you a running conversation between a doctor and a patient. You are a virtual assistant for the patient. Your job is to suggest follow-up questions that the patient should ask the doctor.  Please make sure the questions is brief and concise and can be quickly read and understood by the patient. Please ask only one question. Format your response as Question:<question>. Do not say anything else."
 
 
 const { OpenAI } = require("openai");

@@ -17,37 +17,18 @@ const openai = new OpenAI({
   dangerouslyAllowBrowser: true
 });
 
-const SYSTEM_PROMPT = "I will show you a running conversation between a doctor and a patient. You are a virtual assistant for the patient. Your job is to suggest follow-up questions that the patient should ask the doctor.  Please make sure the questions are brief and concise and can be quickly read and understood by the patient. Please restrict yourself to 2-3 questions. Return the questions as an array in javascript called questions. Do not say anything else"
+// const SYSTEM_PROMPT = "I will show you a running conversation between a doctor and a patient. You are a virtual assistant for the patient. Your job is to suggest follow-up questions that the patient should ask the doctor.  Please make sure the questions are brief and concise and can be quickly read and understood by the patient. Please restrict yourself to 2-3 questions. Return the questions as an array in javascript called questions. Do not say anything else"
+const SYSTEM_PROMPT = "I will show you a running conversation between a doctor and a patient. You are a virtual assistant for the patient. Your job is to suggest follow-up questions that the patient should ask the doctor. Make sure the questions are in first person. Please make sure the questions is short, no more than one sentence and can be quickle read. Please ask only one question. Format your response as Question:<question>. Do not say anything else."
+
+
+
+
 
 function MainComponent() {
     return (
         <MainContainerView />   
     )
   }
-
-  function fnBrowserDetect(){
-                 
-    let userAgent = navigator.userAgent;
-    
-    let browserName;
-    
-    if(userAgent.match('/chrome|chromium|crios/i')){
-        browserName = "chrome";
-      }else if(userAgent.match('/firefox|fxios/i')){
-        browserName = "firefox";
-      }  else if(userAgent.match('/safari/i')){
-        browserName = "safari";
-      }else if(userAgent.match('/opr//i')){
-        browserName = "opera";
-      } else if(userAgent.match('/edg/i')){
-        browserName = "edge";
-      }else{
-        browserName="No browser detection";
-      }
-
-      return userAgent
-            
-}
 
 
   function MainContainerView() {
@@ -79,6 +60,7 @@ function MainComponent() {
                         console.log(finalTranscript)
                         if (finalTranscript.length >= 10)
                         {
+                          console.log(finalTranscript)
                           let message = [{role:"system", content:SYSTEM_PROMPT}, {role:"user", content:finalTranscript}]
                           openai.chat.completions.create({
                             model: "vicuna_13b",
@@ -88,7 +70,7 @@ function MainComponent() {
                             setQuestions(prevQuestion => {
                               return response.choices[0].message.content
                             })
-                            
+                            console.log("LLM Returned Question: ", response.choices[0].message.content)
                           })
                           .catch(err => {
                             console.log(err);
@@ -123,7 +105,6 @@ function MainComponent() {
 
     }, [])
     return (
-        
     <Grid container >
 
     <Grid item sx={{ bgcolor: 'black', width: '60vw', height: '100vh', paddingLeft: 0, paddingRight: 0 }}>
@@ -139,21 +120,5 @@ function MainComponent() {
     )
 
   }
-
-
-//   console.log('Interim transcript: ', interimTranscript);
-//   console.log('Final transcript: ', finalTranscript);
-// };
-
-// recognition.onerror = function (event) {
-//   console.error('Speech recognition error: ', event.error);
-// };
-
-// recognition.onend = function () {
-//   console.log('Speech recognition ended');
-// };
-
-// // Start speech recognition
-// recognition.start();
 
   export default MainComponent

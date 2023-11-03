@@ -1,93 +1,121 @@
-import styles from "./chat.module.css";
+ import styles from "./chat.module.css";
 import React, { useState } from 'react';
 import { ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
+import { TextField, List, ListItem, ListItemText } from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { blue, purple } from '@mui/material/colors';
 import "material-icons/iconfont/material-icons.css";
 import ChatAI from "./chatAITile";
-import {Button } from '@mui/material';
+import ChatAICont from "./chatAI"
+import DoctorTile from "./doctorTile";
 
 
-//example questions until reach questions are ported over
-const questions = [
-  "How long is my appointment?",
-  "When should I meet with you?",
-  
+let doctorArr = [
+  "I would recommend you take this!"
+
+];
+let questionArr = [
+
 ]
 
-const buttonStyle = {
-    display: 'inline-block', // Keep the button side by side
-    marginRight: '10px', 
-    borderRadius: '20px', // Adjusting the border radius to control the roundness
-    color: '#2196F3', // Blue text color
-    backgroundColor: '#FFFFFF', // White background color
-    textTransform: 'none', 
-    padding: '10px 20px', 
-};
+// function mergeUniqueQuestions(originalQuestions, newQuestions) {
+//   newQuestions.forEach(question => {
+//     if (!originalQuestions.includes(question)) {
+//       originalQuestions.push(question);
+//     }
+//   });
+//   return originalQuestions;
+// }
 
-let text = [
-  "Hey there! I'm CareSync, your AI sidekick. I'm here to help you get the most out of your appointment. I'll keep track of the conversation, highlight important words, take notes, and even suggest relevant questions to ask the doctor!",
-  // "You can ask me anything about what's been discussed in the appointment so far, or about general knowledge.",
-  // "Nothing much, you?",
-  // "nah im just chillin",
-];
+// function canConvertStringToArray(str) {
+//   // Check if the string starts with "questions = [" and ends with "]"
+//   if (!str.trim().startsWith('questions = [') || !str.trim().endsWith(']')) {
+//     return false;
+//   }
 
-let text_questions = []
+//   // Check if there is at least one question inside the brackets
+//   const innerContent = str.trim().slice(14, -1).trim();
+//   if (!innerContent.startsWith('"') || !innerContent.endsWith('"')) {
+//     return false;
+//   }
 
-function mergeUniqueQuestions(originalQuestions, newQuestions) {
-  newQuestions.forEach(question => {
-    if (!originalQuestions.includes(question)) {
-      originalQuestions.push(question);
-    }
-  });
-  return originalQuestions;
-}
+//   return true; // The string passed the basic structure checks
+// }
 
-function canConvertStringToArray(str) {
-  // Check if the string starts with "questions = [" and ends with "]"
-  if (!str.trim().startsWith('questions = [') || !str.trim().endsWith(']')) {
-    return false;
-  }
+// function convertStringToArray(str) {
+//   // Check if the string can be converted
+//   if (!canConvertStringToArray(str)) {
+//     return []
+//   }
 
-  // Check if there is at least one question inside the brackets
-  const innerContent = str.trim().slice(14, -1).trim();
-  if (!innerContent.startsWith('"') || !innerContent.endsWith('"')) {
-    return false;
-  }
+//   // Proceed with the conversion
+//   let trimmedString = str.trim().slice(14, -1);
 
-  return true; // The string passed the basic structure checks
-}
+//   // Split the string by '","' to get an array of question strings
+//   let questionsArray = trimmedString.split('","');
 
-function convertStringToArray(str) {
-  // Check if the string can be converted
-  if (!canConvertStringToArray(str)) {
-    return []
-  }
+//   // Trim and fix quotes for each question
+//   questionsArray = questionsArray.map(question => question.trim());
 
-  // Proceed with the conversion
-  let trimmedString = str.trim().slice(14, -1);
+//   // Handle the first and last element separately to remove the leading and trailing quote
+//   questionsArray[0] = questionsArray[0].slice(1);
+//   let lastQuestionIndex = questionsArray.length - 1;
+//   questionsArray[lastQuestionIndex] = questionsArray[lastQuestionIndex].slice(0, -1);
 
-  // Split the string by '","' to get an array of question strings
-  let questionsArray = trimmedString.split('","');
-
-  // Trim and fix quotes for each question
-  questionsArray = questionsArray.map(question => question.trim());
-
-  // Handle the first and last element separately to remove the leading and trailing quote
-  questionsArray[0] = questionsArray[0].slice(1);
-  let lastQuestionIndex = questionsArray.length - 1;
-  questionsArray[lastQuestionIndex] = questionsArray[lastQuestionIndex].slice(0, -1);
-
-  return questionsArray;
-}
+//   return questionsArray;
+// }
 
 
 const Chat = (props) => {
 
   const {generated_questions, random} = props
+  const theme = createTheme({
+    components: {
+      MuiToggleButton: {
+        styleOverrides: {
+          root: {
+            '&.Mui-selected': {
+              backgroundColor: '#3048D3', // Blue color for the active state
+              color: '#fff', // Text color for the active state
+            },
+          },
+        },
+      },
+    },
+  });
+
   const [selectedOption, setSelectedOption] = useState(null);
+
+
+  const [text, setText] = useState('');
+  const [items, setItems] = useState([]);
+
+  const handleTextChange = (event) => {
+    setText(event.target.value);
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter' && text.trim() !== '') {
+      setItems([...items, text]);
+      setText('');
+    }
+  };
 
   const handleOptionChange = (event, newOption) => {
     setSelectedOption(newOption);
   };
+  console.log("before length check: ", generated_questions)
+  if (generated_questions.length > 0){
+    const questionsRegex = /Question:\s*(.*)/;
+    const match = generated_questions.trim().match(questionsRegex);
+    const currentQuestion = match ? match[1].trim().toLowerCase() : '';
+    if (currentQuestion != ''){
+      if (!questionArr.includes(currentQuestion)){
+        questionArr.push(currentQuestion)
+      }
+      
+    } 
+  }
   
   // if (generated_questions.length > 0)
   // {
@@ -101,47 +129,18 @@ const Chat = (props) => {
   //     }
   //   }
   
-  if (generated_questions.length > 0) {
-    const new_questions = convertStringToArray(generated_questions)
-    text = mergeUniqueQuestions(text, new_questions)
-    // const questionsRegex = /Questions:\n\n*(.*)/;
-    // const match = generated_questions.trim().match(questionsRegex);
-    // console.log(match)
-    // if (match) {
-    //   // Ensure the string ends with a question mark for consistent splitting
-    //   let questionsStr = match[1].trim();
-    //   if (!questionsStr.endsWith('?')) {
-    //     questionsStr += '?';
-    //   }
-  
-    //   // Split the questions string into individual questions
-    //   const questions_arr = questionsStr.split('?').map(q => q.trim()).filter(q => q.length > 0);
-  
-    //   // Add a question mark back to each question and check for uniqueness before adding to 'text'
-    //   questions_arr.forEach(q => {
-    //     const questionWithMark = q + '?';
-    //     if (!text.includes(questionWithMark)) {
-    //       text.push(questionWithMark);
-    //     }
-    //   });
-    // }
-  
-      console.log('full text: ', text)
-
   
   
 
-    
-    // if (match){
-    //   if (generated_questions != text[-1])
-    //   {
-    //     text.push(generated_questions)
-    //   }
+  // if (generated_questions.length > 0) {
+  //   const new_questions = convertStringToArray(generated_questions)
+  //   let unique_questions = mergeUniqueQuestions(questionArr, new_questions)
+  //   for (q of unique_questions){
+  //     questionArr.push(unique_questions)
+  //   }
 
-      
-    }
-    
-  
+  //   }
+  // console.log('full text: ', text)
   
   return (
     <div className={styles.chatWindow}>
@@ -174,7 +173,10 @@ const Chat = (props) => {
         </span>
       </div>
       <div style={{ textAlign: 'center', padding: '20px' }}>
+      <ThemeProvider theme={theme}>
+
       <ToggleButtonGroup
+
         value={selectedOption}
         exclusive
         onChange={handleOptionChange}
@@ -190,27 +192,14 @@ const Chat = (props) => {
           Smart Notes
         </ToggleButton>
       </ToggleButtonGroup>
+      </ThemeProvider>
 
       {selectedOption && (
-  <Typography variant="body1" style={{ marginTop: '20px' }}>
-    {selectedOption === 'option1' && (
-      <div>
-        {text.map((text, index) => (
-          <div key={index}>
-            <ChatAI text={text} />
-          </div>
-        ))}
-        <div style={{ marginRight: '250px' }}>Try asking me...</div>
-        <div className={styles.buttonContainer}>
-          {questions.map((question, index) => (
-            <Button key={index} variant="contained" style={buttonStyle}>
-              {question}
-            </Button>
-          ))}
-        </div>
-      </div>
-    )}
-          {selectedOption === 'option2' && 'Text for Transcript is displayed.'}
+        <Typography variant="body1" style={{ marginTop: '20px' }}>
+          {selectedOption === 'option1' && <ChatAICont questionArr = {questionArr}/>}
+          {selectedOption === 'option2' && <div>{doctorArr.map((text) => (
+            <DoctorTile text={text} />
+        ))}</div> }
           {selectedOption === 'option3' && 'Text for Smart Notes is displayed.'}
         </Typography>
       )}
