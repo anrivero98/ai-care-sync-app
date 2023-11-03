@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
-
 .message {
     display: flex;
     margin-bottom: 5px;
@@ -28,7 +26,7 @@
   }
 
 
-  .robotHolder{
+  .doctorHolder{
     display: flex;
     width: 30px;
     height: 30px;
@@ -38,7 +36,6 @@
     margin-top: 20px;
     justify-content: center;
     align-items: center;
-    background-color: blue;
     
 
   }
@@ -82,6 +79,6 @@
     width: 362px;
     
     align-items: center;
-
+    
 
   }

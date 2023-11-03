@@ -20,7 +20,7 @@
 }
 
 .tab{
-  color: #151515;
+  color: #3f3f3f;
 font-feature-settings: 'clig' off, 'liga' off;
 font-family: Poppins;
 font-size: 14px;
@@ -93,12 +93,12 @@ line-height: 22px;
     
     border: 1px solid #ccc;
     width: 520px;
-    height: 80vh;
+    height: 100vh;
     margin: auto;
     display: flex;
     flex-direction: column;
     justify-content: flex-start; /* Align messages to the bottom */
     align-items: center;
-    overflow-y: scroll;
+    overflow-y: hidden;
     
   }

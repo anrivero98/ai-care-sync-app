@@ -3,7 +3,7 @@ import { useState } from "react";
 import "material-icons/iconfont/material-icons.css";
 import React from "react";
 
-const ChatAI = (props) => {
+const ChatAITile = (props) => {
   const { text } = props;
   return (
     <div className={styles.chatWindow}>
@@ -34,6 +34,7 @@ const ChatAI = (props) => {
             </defs>
           </svg>
         </div>
+        <div className={styles.chatTextHolder}>Sync Bot</div>
       </div>
       <div className={styles.message}>
         <p>{text}</p>
@@ -42,5 +43,5 @@ const ChatAI = (props) => {
   );
 };
 
-export default ChatAI;
+export default ChatAITile;
 

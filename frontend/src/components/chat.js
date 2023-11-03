@@ -1,23 +1,66 @@
 import styles from "./chat.module.css";
 import React, { useState } from 'react';
 import { ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
+import { TextField, List, ListItem, ListItemText } from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { blue, purple } from '@mui/material/colors';
 import "material-icons/iconfont/material-icons.css";
 import ChatAI from "./chatAITile";
+import ChatAICont from "./chatAI"
+import DoctorTile from "./doctorTile";
+
 
 function Chat() {
 
+  const theme = createTheme({
+    components: {
+      MuiToggleButton: {
+        styleOverrides: {
+          root: {
+            '&.Mui-selected': {
+              backgroundColor: '#3048D3', // Blue color for the active state
+              color: '#fff', // Text color for the active state
+            },
+          },
+        },
+      },
+    },
+  });
+
   const [selectedOption, setSelectedOption] = useState(null);
+
+
+  const [text, setText] = useState('');
+  const [items, setItems] = useState([]);
+
+  const handleTextChange = (event) => {
+    setText(event.target.value);
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter' && text.trim() !== '') {
+      setItems([...items, text]);
+      setText('');
+    }
+  };
 
   const handleOptionChange = (event, newOption) => {
     setSelectedOption(newOption);
   };
 
-  let text = [
+  let textArr = [
     "Hey there! I'm CareSync, your AI sidekick. I'm here to help you get the most out of your appointment. I'll keep track of the conversation, highlight important words, take notes, and even suggest relevant questions to ask the doctor!",
     "You can ask me anything about what's been discussed in the appointment so far, or about general knowledge.",
-    "Nothing much, you?",
-    "nah im just chillin",
   ];
+
+  let questionArr = [
+    "You could ask questions like:\n Am I dying?\n"
+];
+
+let doctorArr = [
+  "I would recommend you take this!"
+
+];
   
   return (
     <div className={styles.chatWindow}>
@@ -50,7 +93,10 @@ function Chat() {
         </span>
       </div>
       <div style={{ textAlign: 'center', padding: '20px' }}>
+      <ThemeProvider theme={theme}>
+
       <ToggleButtonGroup
+
         value={selectedOption}
         exclusive
         onChange={handleOptionChange}
@@ -66,13 +112,14 @@ function Chat() {
           Smart Notes
         </ToggleButton>
       </ToggleButtonGroup>
+      </ThemeProvider>
 
       {selectedOption && (
         <Typography variant="body1" style={{ marginTop: '20px' }}>
-          {selectedOption === 'option1' && <div>{text.map((text) => (
-        <ChatAI text={text} />
-      ))}</div>}
-          {selectedOption === 'option2' && 'Text for Transcript is displayed.'}
+          {selectedOption === 'option1' && <ChatAICont />}
+          {selectedOption === 'option2' && <div>{doctorArr.map((text) => (
+            <DoctorTile text={text} />
+        ))}</div> }
           {selectedOption === 'option3' && 'Text for Smart Notes is displayed.'}
         </Typography>
       )}
