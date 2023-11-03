@@ -23,21 +23,125 @@ const buttonStyle = {
     padding: '10px 20px', 
 };
 
+let text = [
+  "Hey there! I'm CareSync, your AI sidekick. I'm here to help you get the most out of your appointment. I'll keep track of the conversation, highlight important words, take notes, and even suggest relevant questions to ask the doctor!",
+  // "You can ask me anything about what's been discussed in the appointment so far, or about general knowledge.",
+  // "Nothing much, you?",
+  // "nah im just chillin",
+];
 
-function Chat() {
+let text_questions = []
 
+function mergeUniqueQuestions(originalQuestions, newQuestions) {
+  newQuestions.forEach(question => {
+    if (!originalQuestions.includes(question)) {
+      originalQuestions.push(question);
+    }
+  });
+  return originalQuestions;
+}
+
+function canConvertStringToArray(str) {
+  // Check if the string starts with "questions = [" and ends with "]"
+  if (!str.trim().startsWith('questions = [') || !str.trim().endsWith(']')) {
+    return false;
+  }
+
+  // Check if there is at least one question inside the brackets
+  const innerContent = str.trim().slice(14, -1).trim();
+  if (!innerContent.startsWith('"') || !innerContent.endsWith('"')) {
+    return false;
+  }
+
+  return true; // The string passed the basic structure checks
+}
+
+function convertStringToArray(str) {
+  // Check if the string can be converted
+  if (!canConvertStringToArray(str)) {
+    return []
+  }
+
+  // Proceed with the conversion
+  let trimmedString = str.trim().slice(14, -1);
+
+  // Split the string by '","' to get an array of question strings
+  let questionsArray = trimmedString.split('","');
+
+  // Trim and fix quotes for each question
+  questionsArray = questionsArray.map(question => question.trim());
+
+  // Handle the first and last element separately to remove the leading and trailing quote
+  questionsArray[0] = questionsArray[0].slice(1);
+  let lastQuestionIndex = questionsArray.length - 1;
+  questionsArray[lastQuestionIndex] = questionsArray[lastQuestionIndex].slice(0, -1);
+
+  return questionsArray;
+}
+
+
+const Chat = (props) => {
+
+  const {generated_questions, random} = props
   const [selectedOption, setSelectedOption] = useState(null);
 
   const handleOptionChange = (event, newOption) => {
     setSelectedOption(newOption);
   };
+  
+  // if (generated_questions.length > 0)
+  // {
+  //   const questionsRegex = /Questions:\s*(.*)/;
+  //   const match = generated_questions.trim().match(questionsRegex);
+  //   const questions_arr = match ? match[1].trim().toLowerCase() : '';
+  //   for (const q of questions_arr.split('?')){
+  //     if (!text.includes(q))
+  //     {
+  //       text.push(q)
+  //     }
+  //   }
+  
+  if (generated_questions.length > 0) {
+    const new_questions = convertStringToArray(generated_questions)
+    text = mergeUniqueQuestions(text, new_questions)
+    // const questionsRegex = /Questions:\n\n*(.*)/;
+    // const match = generated_questions.trim().match(questionsRegex);
+    // console.log(match)
+    // if (match) {
+    //   // Ensure the string ends with a question mark for consistent splitting
+    //   let questionsStr = match[1].trim();
+    //   if (!questionsStr.endsWith('?')) {
+    //     questionsStr += '?';
+    //   }
+  
+    //   // Split the questions string into individual questions
+    //   const questions_arr = questionsStr.split('?').map(q => q.trim()).filter(q => q.length > 0);
+  
+    //   // Add a question mark back to each question and check for uniqueness before adding to 'text'
+    //   questions_arr.forEach(q => {
+    //     const questionWithMark = q + '?';
+    //     if (!text.includes(questionWithMark)) {
+    //       text.push(questionWithMark);
+    //     }
+    //   });
+    // }
+  
+      console.log('full text: ', text)
 
-  let text = [
-    "Hey there! I'm CareSync, your AI sidekick. I'm here to help you get the most out of your appointment. I'll keep track of the conversation, highlight important words, take notes, and even suggest relevant questions to ask the doctor!",
-    "You can ask me anything about what's been discussed in the appointment so far, or about general knowledge.",
-    "Nothing much, you?",
-    "nah im just chillin",
-  ];
+  
+  
+
+    
+    // if (match){
+    //   if (generated_questions != text[-1])
+    //   {
+    //     text.push(generated_questions)
+    //   }
+
+      
+    }
+    
+  
   
   return (
     <div className={styles.chatWindow}>
