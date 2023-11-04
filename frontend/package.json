@@ -19,7 +19,7 @@
     "jsrsasign-util": "^1.0.5",
     "material-design-icons-iconfont": "^6.7.0",
     "material-icons": "^1.13.12",
-    "openai": "^4.14.2",
+    "openai": "^4.15.0",
     "react": "^17.0.2",
     "react-bootstrap": "^2.2.1",
     "react-dom": "^17.0.2",

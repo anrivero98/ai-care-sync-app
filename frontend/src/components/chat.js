@@ -68,7 +68,12 @@ let questionArr = [
 
 const Chat = (props) => {
 
-  const {generated_questions, random} = props
+  const {generated_questions, transcriptList, random} = props
+
+  
+  
+  
+
   const theme = createTheme({
     components: {
       MuiToggleButton: {
@@ -197,8 +202,9 @@ const Chat = (props) => {
       {selectedOption && (
         <Typography variant="body1" style={{ marginTop: '20px' }}>
           {selectedOption === 'option1' && <ChatAICont questionArr = {questionArr}/>}
-          {selectedOption === 'option2' && <div>{doctorArr.map((text) => (
-            <DoctorTile text={text} />
+          {selectedOption === 'option2' && <div>{transcriptList.map((item) => ( 
+            <DoctorTile text={item} />
+            
         ))}</div> }
           {selectedOption === 'option3' && 'Text for Smart Notes is displayed.'}
         </Typography>

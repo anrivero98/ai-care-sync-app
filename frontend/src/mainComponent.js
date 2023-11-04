@@ -112,7 +112,7 @@ function MainComponent() {
     </Grid>
 
     <Grid item sx={{ bgcolor: 'grey',  width: '40vw', height: '100vh', paddingLeft: 0, paddingRight: 0 }} >
-        <Chat generated_questions={genQuestions} random={"something else"}/>
+        <Chat generated_questions={genQuestions} random={"something else"} transcriptList={speechList}/>
 
     </Grid>
         
