@@ -10,6 +10,10 @@ import { useLocation, useHistory } from "react-router-dom";
 import {useEffect } from 'react'
 import ZoomVideo from '@zoom/videosdk'
 import { useReactMediaRecorder } from "react-media-recorder";
+import { firestore } from './config'
+
+
+
 
 var constraints = { audio: true }
 

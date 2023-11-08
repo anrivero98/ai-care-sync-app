@@ -24,6 +24,7 @@ const SYSTEM_PROMPT = "I will show you a running conversation between a doctor a
 
 
 
+
 function MainComponent() {
     return (
         <MainContainerView />   
