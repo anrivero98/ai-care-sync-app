@@ -1,16 +1,15 @@
-import React from "react";
+import React, { useState} from "react";
 import ReactDOM from "react-dom";
 import { Router, Routes } from "react-router-dom";
 import "./index.css";
-import App from "./App";
 import MainComponent from "./mainComponent";
 import reportWebVitals from "./reportWebVitals";
 import { createHashHistory } from "history";
 import { useLocation, useHistory } from "react-router-dom";
-import {useEffect } from 'react'
-import ZoomVideo from '@zoom/videosdk'
+import {useEffect } from 'react';
+import ZoomVideo from '@zoom/videosdk';
 import { useReactMediaRecorder } from "react-media-recorder";
-import { firestore } from './config'
+import { firestore } from './config';
 
 
 
@@ -77,7 +76,7 @@ const client = ZoomVideo.createClient()
 
 
 
-
+// console.log("Test print");
 ReactDOM.render(
   <React.StrictMode>
     <Router history={history}>

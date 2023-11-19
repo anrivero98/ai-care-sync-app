@@ -1,14 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import {useEffect } from 'react'
+import {useEffect, useState } from 'react'
 import Stack from '@mui/material/Stack';
 import Grid from '@mui/material/Grid';
+import Modal from "./components/modal";
 import { styled } from "@mui/material/styles";
 import Container from '@mui/material/Container';
 // const { OpenAI } = require("openai");
 import Chat from './components/chat'
-import { useState } from 'react';
 import FirestoreFunctions from './service/firestoreFunctions'
+import { ManOutlined } from "@mui/icons-material";
 
 
 
@@ -29,19 +30,29 @@ const SYSTEM_PROMPT = "I will show you a running conversation between a doctor a
 
 
 function MainComponent() {
+
     return (
         <MainContainerView />   
     )
   }
 
+  
 
   function MainContainerView() {
-    
+    const [isOpen, setIsOpen] = useState(true);
+    const [isLoggedIn, setLoggedIn] = useState(false);
     const [speechList, setSpeechList] = useState([]);
     const [genQuestions, setQuestions] = useState('');
 
+
+    const handleFormSubmit = (event) => {
+      event.preventDefault();
+      // Handle form submission logic here
+      setIsOpen(false); // Close the modal after form submission
+    };
+
     var isMounted = false
-    
+    console.log('IsOpen: ', isOpen);
     useEffect(() => {
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         const recognition = new SpeechRecognition();
@@ -116,16 +127,17 @@ function MainComponent() {
     }, [])
     return (
     <Grid container >
-
-    <Grid item sx={{ bgcolor: 'black', width: '60vw', height: '100vh', paddingLeft: 0, paddingRight: 0 }}>
-      text
-    </Grid>
-
-    <Grid item sx={{ bgcolor: 'grey',  width: '40vw', height: '100vh', paddingLeft: 0, paddingRight: 0 }} >
+      <div>
+       <Modal open={isOpen}/>
+      </div>
+      <Grid item sx={{ bgcolor: 'black', width: '60vw', height: '100vh', paddingLeft: 0, paddingRight: 0 }}>
+        text
+      </Grid>
+      <Grid item sx={{ bgcolor: 'grey',  width: '40vw', height: '100vh', paddingLeft: 0, paddingRight: 0 }} >
         <Chat generated_questions={genQuestions} random={"something else"} transcriptList={speechList}/>
 
-    </Grid>
-        
+      </Grid>
+      
     </Grid>
     )
 
