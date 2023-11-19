@@ -81,7 +81,7 @@ function MainComponent() {
                             if(prev_state.length > 0) {
                                 let old_transcript = prev_state[prev_state.length - 1]
                                 finalTranscript = finalTranscript.replace(old_transcript, '')
-                                
+                                // TODO -> update firebase
                             }
 
                             return [...prev_state, finalTranscript]
