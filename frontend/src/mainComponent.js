@@ -8,6 +8,9 @@ import Container from '@mui/material/Container';
 // const { OpenAI } = require("openai");
 import Chat from './components/chat'
 import { useState } from 'react';
+import FirestoreFunctions from './service/firestoreFunctions'
+
+
 
 const { OpenAI } = require("openai");
 
@@ -82,6 +85,12 @@ function MainComponent() {
                                 let old_transcript = prev_state[prev_state.length - 1]
                                 finalTranscript = finalTranscript.replace(old_transcript, '')
                                 // TODO -> update firebase
+                                let sessionID = "6r6UljhafcmYPdJ4FQmA"
+                                let speakerID = "CM2eZq6c1P008ONaEMDD"
+                                const currentTime = new Date().getTime()
+                                const currentTimestamp = new Date(currentTime)
+                                FirestoreFunctions.addTranscript(sessionID, speakerID, finalTranscript,currentTimestamp)
+                               
                             }
 
                             return [...prev_state, finalTranscript]

@@ -1,7 +1,8 @@
 import { firestore } from '../config'
 
 
-import { collection, addDoc } from "firebase/firestore"; 
+
+import { collection, addDoc, doc } from "firebase/firestore"; 
 
 
 export class FirestoreFunctions {
@@ -22,7 +23,26 @@ export class FirestoreFunctions {
     }
 
 
-    // static async addTranscript(sessionId, speakerId, utterance, timestamp) {
+    static async addTranscript(sessionId, speakerId, utterance, timestamp) {
+        try{
+           const sessionRef = doc(collection(firestore, "sessions"), sessionId)
+           const transcriptCollRef = collection(sessionRef,"transcript");
+            const transcriptRef = await addDoc(transcriptCollRef,{
+                speakerId: speakerId,
+                utterance: utterance,
+                timestamp: timestamp
+            });
+            return transcriptRef.id
+           
 
-    // }
+            
+
+        }
+        catch (error) {
+            console.log("Error adding transcript: ", error);
+            return error;
+
+        }
+    };
 }
+export default FirestoreFunctions;
