@@ -73,3 +73,27 @@
 .additional-options button:hover {
     background-color: #e0e0e0; /* Slightly darker on hover */
 }
+
+/* ... existing styles ... */
+
+/* ... existing styles ... */
+
+.user-type-select {
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-type-select select {
+    padding: 5px;
+    border: 1px solid #d0d0d0;
+    border-radius: 4px;
+    background-color: #f0f0f0;
+}
+
+.user-type-select label {
+    margin-right: 10px;
+}
+
+

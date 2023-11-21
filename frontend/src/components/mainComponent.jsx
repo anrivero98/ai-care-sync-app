@@ -3,12 +3,12 @@ import ReactDOM from "react-dom";
 import {useEffect, useState } from 'react'
 import Stack from '@mui/material/Stack';
 import Grid from '@mui/material/Grid';
-import Modal from "./components/modal";
+import Modal from "./modal";
 import { styled } from "@mui/material/styles";
 import Container from '@mui/material/Container';
 // const { OpenAI } = require("openai");
-import Chat from './components/chat'
-import FirestoreFunctions from './service/firestoreFunctions'
+import Chat from './chat'
+import FirestoreFunctions from '../service/firestoreFunctions'
 import { ManOutlined } from "@mui/icons-material";
 
 

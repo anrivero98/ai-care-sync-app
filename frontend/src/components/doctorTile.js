@@ -1,4 +1,4 @@
-import styles from "./doctorTile.module.css";
+import styles from "../styles/doctorTile.module.css";
 import { useState } from "react";
 import "material-icons/iconfont/material-icons.css";
 import React from "react";

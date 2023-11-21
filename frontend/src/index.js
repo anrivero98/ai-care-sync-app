@@ -2,7 +2,8 @@ import React, { useState} from "react";
 import ReactDOM from "react-dom";
 import { Router, Routes } from "react-router-dom";
 import "./index.css";
-import MainComponent from "./mainComponent";
+import App from "./App";
+import MainComponent from "./components/mainComponent";
 import reportWebVitals from "./reportWebVitals";
 import { createHashHistory } from "history";
 import { useLocation, useHistory } from "react-router-dom";
@@ -80,8 +81,8 @@ const client = ZoomVideo.createClient()
 ReactDOM.render(
   <React.StrictMode>
     <Router history={history}>
-      {/* <App /> */}
-      <MainComponent />
+      <App />
+      {/* <MainComponent /> */}
       {/* <TestApp /> */}
     </Router>
   </React.StrictMode>,

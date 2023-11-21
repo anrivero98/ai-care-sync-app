@@ -1,4 +1,4 @@
-import styles from "./questionTile.module.css";
+import styles from "../styles/questionTile.module.css";
 import { useState } from "react";
 import "material-icons/iconfont/material-icons.css";
 import React from "react";
