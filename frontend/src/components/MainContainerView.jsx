@@ -2,11 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 import Modal from './modal';
-// import Modal from './Modal';
-import Chat from './chat';
-// import FirestoreFunctions from ''
+import Chat from './chat/chat';
 import FirestoreFunctions from '../service/firestoreFunctions';
-// import OpenAI from 'openai';
 
 const { OpenAI } = require("openai");
 

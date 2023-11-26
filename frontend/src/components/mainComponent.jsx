@@ -1,11 +1,13 @@
 import React from "react";
-import {useEffect, useState } from 'react'
 import MainContainerView from "./MainContainerView";
-import Grid from '@mui/material/Grid';
-import Modal from "./modal";
-import Chat from './chat'
+
 
 {/* Unnecessary Imports */}
+
+// import {useEffect, useState } from 'react'
+// import Grid from '@mui/material/Grid';
+// import Modal from "./modal";
+// import Chat from './chat'
 // import { ManOutlined } from "@mui/icons-material";
 // import ReactDOM from "react-dom";
 // import Stack from '@mui/material/Stack';
@@ -17,8 +19,14 @@ import Chat from './chat'
 
 
 function MainComponent() {
+    // const [isOpen, setIsOpen] = useState(true);
     return (
-        <MainContainerView />   
+        // <div>
+        //   <Modal open={isOpen}/>
+        // </div>
+        <div className="Zoom-Container">
+          <MainContainerView />
+        </div>
     )
   }
   export default MainComponent

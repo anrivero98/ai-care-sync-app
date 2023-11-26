@@ -16,16 +16,7 @@ function App() {
     return (
         <div className="App">
             <header className="App-header">
-            
             <MainComponent/>
-                {/* Your App content here */}
-                {/* <h1>Welcome to My App</h1>
-                
-                {/* Example button to open the modal */}
-                {/* <button onClick={toggleModal}>Open Modal</button> */}
-                
-                {/* Render the Modal component */}
-                {/* <Modal open={isModalOpen} /> */}
             </header>
         </div>
     );

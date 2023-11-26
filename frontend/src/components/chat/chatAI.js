@@ -1,4 +1,4 @@
-import  styles from "../styles/chatAICont.module.css";
+import  styles from "../../styles/chatAICont.module.css";
 import React, { useState } from 'react';
 import { ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
 import { TextField, List, ListItem, ListItemText } from '@mui/material';
