@@ -5,9 +5,10 @@ import { TextField, List, ListItem, ListItemText } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { blue, purple } from '@mui/material/colors';
 import "material-icons/iconfont/material-icons.css";
-import ChatAI from "./chatAITile";
+// import ChatAI from "./chatAI";
 import ChatAICont from "./chatAI"
 import DoctorTile from "../doctorTile";
+import QuestionTile from '../questionTile';
 
 
 let doctorArr = [

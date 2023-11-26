@@ -7,8 +7,8 @@ import { borders } from '@mui/system';
 
 import "material-icons/iconfont/material-icons.css";
 import ChatAITile from "./chatAITile";
-import QuestionTile from "./questionTile"
-import DoctorTile from "./doctorTile";
+import QuestionTile from "../questionTile"
+import DoctorTile from "../doctorTile";
 
 
 
