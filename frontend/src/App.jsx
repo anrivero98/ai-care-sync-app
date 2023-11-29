@@ -1,6 +1,7 @@
 import React from 'react';
 import Modal from './components/modal'
 import MainComponent from './components/mainComponent';
+import MainHeader from './components/MainHeader';
 // import Modal from './Modal'; // Import your Modal component or any other component
 
 // Main App component
@@ -15,9 +16,10 @@ function App() {
 
     return (
         <div className="App">
-            <header className="App-header">
+            {/* <header className="App-header"> */}
+            <MainHeader/>
             <MainComponent/>
-            </header>
+            {/* </header> */}
         </div>
     );
 }
