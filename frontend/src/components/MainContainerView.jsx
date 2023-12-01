@@ -87,14 +87,14 @@ const MainContainerView = () => {
     }, []);
 
     return (
-      <Grid container>
+      <Grid container style={{height: '100vh' }}>
         <div>
           <Modal open={isOpen}/>
         </div>
-        <Grid item sx={{ bgcolor: 'black', width: '60vw', height: '100vh', paddingLeft: 0, paddingRight: 0 }}>
+        <Grid item sx={{ bgcolor: 'black', width: '60%', height: '100%', paddingLeft: 0, paddingRight: 0 }}>
           text
         </Grid>
-        <Grid item sx={{ bgcolor: 'grey',  width: '40vw', height: '100vh', paddingLeft: 0, paddingRight: 0 }}>
+        <Grid item sx={{ bgcolor: 'white',  width: '40%', height: '100%', paddingLeft: 0, paddingRight: 0, border: 'none' }}>
           <Chat generated_questions={genQuestions} random={"something else"} transcriptList={speechList}/>
         </Grid>
       </Grid>

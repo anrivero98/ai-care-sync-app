@@ -4,9 +4,11 @@ import "material-icons/iconfont/material-icons.css";
 import React from "react";
 
 const ChatAITile = (props) => {
-  const { text } = props;
+  const { text, blurred } = props;
+  const chatWindowClasses = `${styles.chatWindow} ${blurred ? styles.blurred : ''}`;
+
   return (
-    <div className={styles.chatWindow}>
+    <div className={chatWindowClasses}>
       <div className={styles.chatBoxTop}>
         <div className={styles.robotHolder}>
           <svg
