@@ -15,11 +15,8 @@ import DoctorTile from "../doctorTile";
 const ChatAICont = (props) => {
 
     let textArr = [
-        //"Hey there! I'm CareSync, your AI sidekick. I'm here to help you get the most out of your appointment. I'll keep track of the conversation, highlight important words, take notes, and even suggest relevant questions to ask the doctor!",
-        "How long is the appointment?",
-        "What's the capital of Germany?",
-        "Who is Robert de Niro?",
-        //"You can ask me anything about what's been discussed in the appointment so far, or about general knowledge.",
+        "Hey there! I'm CareSync, your AI sidekick. I'm here to help you get the most out of your appointment. I'll keep track of the conversation, highlight important words, take notes, and even suggest relevant questions to ask the doctor!",
+        "You can ask me anything about what's been discussed in the appointment so far, or about general knowledge.",
     ];
 
     const {questionArr} = props
@@ -46,13 +43,8 @@ const ChatAICont = (props) => {
     <div className={styles.outerContainer}>
       
         <div className={styles.compContainer}>
-        <div>{textArr.map((text, index) => (
-              <ChatAITile 
-              key={'textArr-${index}'}
-              text={text} 
-              blurred={index !== textArr.length-1 }
-    
-              />
+        <div>{textArr.map((text) => (
+              <ChatAITile text={text} />
           ))}</div>
         
         <div>{questionArr.map((text) => (
@@ -64,7 +56,6 @@ const ChatAICont = (props) => {
 
               <List>
               <div>{items.map((text) => (
-              
               <ChatAITile text={text} />
           ))}</div>
               </List>
@@ -78,7 +69,7 @@ const ChatAICont = (props) => {
               borderRadius: "120px",
             }
           }}
-            sx={{marginTop:'50px', width: '30vw'}} 
+            sx={{marginTop:'15px', width: '30vw'}}
             label="Ask the AI..."
             variant="outlined"
             fullWidth

@@ -92,7 +92,7 @@ line-height: 22px;
     border-radius: 10px;
     
     border: 1px solid #ccc;
-    width: 580px;
+    width: 520px;
     height: 100vh;
     margin: auto;
     display: flex;
@@ -100,7 +100,6 @@ line-height: 22px;
     justify-content: flex-start; /* Align messages to the bottom */
     align-items: center;
     overflow-y: hidden;
-    
     
   }
 

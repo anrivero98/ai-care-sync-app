@@ -1,12 +1,20 @@
 
 import React, { useState, useEffect } from 'react';
 import Grid from '@mui/material/Grid';
-import Modal from './modal';
 import Chat from './chat/chat';
 import FirestoreFunctions from '../service/firestoreFunctions';
+import LoginWindow from './login/loginWindow';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
+import { auth } from '../config'; // Adjust the path as necessary
+
 
 const { OpenAI } = require("openai");
 
+const mockCredentials = {
+  email: 'test@ucsc.edu',
+  password: 'password',
+};
 
 const openai = new OpenAI({
   apiKey: "EMPTY",
@@ -17,21 +25,90 @@ const openai = new OpenAI({
 // const SYSTEM_PROMPT = "I will show you a running conversation between a doctor and a patient. You are a virtual assistant for the patient. Your job is to suggest follow-up questions that the patient should ask the doctor.  Please make sure the questions are brief and concise and can be quickly read and understood by the patient. Please restrict yourself to 2-3 questions. Return the questions as an array in javascript called questions. Do not say anything else"
 const SYSTEM_PROMPT = "I will show you a running conversation between a doctor and a patient. You are a virtual assistant for the patient. Your job is to suggest follow-up questions that the patient should ask the doctor. Make sure the questions are in first person. Please make sure the questions is short, no more than one sentence and can be quickle read. Please ask only one question. Format your response as Question:<question>. Do not say anything else."
 
-
-
 const MainContainerView = () => {
-    const [isOpen, setIsOpen] = useState(true);
+    
     const [isLoggedIn, setLoggedIn] = useState(false);
     const [speechList, setSpeechList] = useState([]);
     const [genQuestions, setQuestions] = useState('');
 
-    const handleFormSubmit = (event) => {
-      event.preventDefault();
-      setIsOpen(false);
+    useEffect(() => {
+      const auth = getAuth();
+      const unsubscribe = onAuthStateChanged(auth, (user) => {
+        if (user) {
+          console.log('User ', user.email)
+          // console.log('Password ', user.)
+          // User is signed in
+          setLoggedIn(true);
+        } else {
+          // User is signed out
+          setLoggedIn(false);
+        }
+      });
+  
+      // Cleanup subscription on unmount
+      return () => unsubscribe();
+    }, []);
+    
+
+    const createTestAccount = async () => {
+      const email = 'test@ucsc.edu'; // Change to your desired test account email
+      const password = 'password'; // Change to your desired test account password
+  
+      try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        console.log('Test account created:', userCredential.user);
+      } catch (error) {
+        console.error('Error creating test account:', error);
+      }
+    };
+
+    // useEffect(() =>{
+    //   createTestAccount();
+    //   // console.log()
+    // }, []);
+    const handleSignOut = async () => {
+      const auth = getAuth();
+      try {
+        await signOut(auth);
+        setLoggedIn(false);
+      } catch (error) {
+        console.error('Error signing out:', error);
+      }
+    };
+    const userLogin = async (username, password) => {
+      // try {
+      //   // Check if the provided credentials match the mock credentials
+      //   if (username === mockCredentials.email && password === mockCredentials.password) {
+      //     setLoggedIn(true); // Log the user in
+      //     console.log('Mock login successful');
+      //   } else {
+      //     console.log('Mock login failed. Please check your username and password.');
+      //   }
+      // } catch (error) {
+      //   console.error('Login error:', error);
+      // }
+
+      /* Firebase calls (use later) */
+      try {
+        // Call a service function to validate the user.
+        // This is usually an async call to a backend service or database.
+        const isValid = await FirestoreFunctions.validateUser(username, password);
+        
+        // If the user is valid, update the loggedIn state to true.
+        if (isValid) {
+          setLoggedIn(true);
+        } else {
+          // Handle the case where login is not successful.
+          // You could set an error message state here to display a message to the user.
+          console.log('Login failed. Please check your username and password.');
+        }
+      } catch (error) {
+        // Handle any errors that occur during the login process
+        console.error('Login error:', error);
+      }
     };
 
     var isMounted = false;
-    console.log('IsOpen: ', isOpen);
     
     useEffect(() => {
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -87,15 +164,23 @@ const MainContainerView = () => {
     }, []);
 
     return (
-      <Grid container style={{height: '100vh' }}>
-        <div>
-          <Modal open={isOpen}/>
-        </div>
-        <Grid item sx={{ bgcolor: 'black', width: '60%', height: '100%', paddingLeft: 0, paddingRight: 0 }}>
-          text
+      <Grid container>
+        <Grid item sx={{ bgcolor: 'black', width: '60vw', height: '100vh', paddingLeft: 0, paddingRight: 0 }}>
+          {/* text */}
         </Grid>
-        <Grid item sx={{ bgcolor: 'white',  width: '40%', height: '100%', paddingLeft: 0, paddingRight: 0, border: 'none' }}>
-          <Chat generated_questions={genQuestions} random={"something else"} transcriptList={speechList}/>
+        <Grid item sx={{ bgcolor: 'grey',  width: '40vw', height: '100vh', paddingLeft: 0, paddingRight: 0 }}>
+        {isLoggedIn ? (
+              <Chat 
+              handleSignOut={handleSignOut} 
+              generated_questions={genQuestions}
+              random={"something else"}
+              transcriptList={speechList}
+              />
+            ) : (
+              <LoginWindow handleUserLogin={userLogin} />
+
+            )}
+          {/* <LoginWindow /> */}
         </Grid>
       </Grid>
     );

@@ -4,13 +4,9 @@ import "material-icons/iconfont/material-icons.css";
 import React from "react";
 
 const ChatAITile = (props) => {
-  const { text, blurred } = props;
-  const chatWindowClasses = `${styles.chatWindow} ${blurred ? styles.blurred : ''}`;
-  const options = { hour: 'numeric', minute: 'numeric' };
-  const [createdTime] = useState(new Date().toLocaleTimeString([], options));
-
+  const { text } = props;
   return (
-    <div className={chatWindowClasses}>
+    <div className={styles.chatWindow}>
       <div className={styles.chatBoxTop}>
         <div className={styles.robotHolder}>
           <svg
@@ -39,7 +35,6 @@ const ChatAITile = (props) => {
           </svg>
         </div>
         <div className={styles.chatTextHolder}>Sync Bot</div>
-        <div className={styles.chatTimeHolder}>{createdTime}</div>
       </div>
       <div className={styles.message}>
         <p>{text}</p>

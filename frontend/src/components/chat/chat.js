@@ -1,14 +1,12 @@
  import styles from "../../styles/chat.module.css"
 import React, { useState } from 'react';
 import { ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
-import { TextField, List, ListItem, ListItemText } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { blue, purple } from '@mui/material/colors';
 import "material-icons/iconfont/material-icons.css";
-// import ChatAI from "./chatAI";
+import Box from '@mui/material/Box';
 import ChatAICont from "./chatAI"
 import DoctorTile from "../doctorTile";
-import QuestionTile from '../questionTile';
+import { getAuth, signOut } from 'firebase/auth';
 
 
 let doctorArr = [
@@ -19,61 +17,8 @@ let questionArr = [
 
 ]
 
-// function mergeUniqueQuestions(originalQuestions, newQuestions) {
-//   newQuestions.forEach(question => {
-//     if (!originalQuestions.includes(question)) {
-//       originalQuestions.push(question);
-//     }
-//   });
-//   return originalQuestions;
-// }
-
-// function canConvertStringToArray(str) {
-//   // Check if the string starts with "questions = [" and ends with "]"
-//   if (!str.trim().startsWith('questions = [') || !str.trim().endsWith(']')) {
-//     return false;
-//   }
-
-//   // Check if there is at least one question inside the brackets
-//   const innerContent = str.trim().slice(14, -1).trim();
-//   if (!innerContent.startsWith('"') || !innerContent.endsWith('"')) {
-//     return false;
-//   }
-
-//   return true; // The string passed the basic structure checks
-// }
-
-// function convertStringToArray(str) {
-//   // Check if the string can be converted
-//   if (!canConvertStringToArray(str)) {
-//     return []
-//   }
-
-//   // Proceed with the conversion
-//   let trimmedString = str.trim().slice(14, -1);
-
-//   // Split the string by '","' to get an array of question strings
-//   let questionsArray = trimmedString.split('","');
-
-//   // Trim and fix quotes for each question
-//   questionsArray = questionsArray.map(question => question.trim());
-
-//   // Handle the first and last element separately to remove the leading and trailing quote
-//   questionsArray[0] = questionsArray[0].slice(1);
-//   let lastQuestionIndex = questionsArray.length - 1;
-//   questionsArray[lastQuestionIndex] = questionsArray[lastQuestionIndex].slice(0, -1);
-
-//   return questionsArray;
-// }
-
-
 const Chat = (props) => {
-
-  const {generated_questions, transcriptList, random} = props
-
-  
-  
-  
+  const {handleSignOut, generated_questions, transcriptList, random} = props
 
   const theme = createTheme({
     components: {
@@ -123,38 +68,13 @@ const Chat = (props) => {
     } 
   }
   
-  // if (generated_questions.length > 0)
-  // {
-  //   const questionsRegex = /Questions:\s*(.*)/;
-  //   const match = generated_questions.trim().match(questionsRegex);
-  //   const questions_arr = match ? match[1].trim().toLowerCase() : '';
-  //   for (const q of questions_arr.split('?')){
-  //     if (!text.includes(q))
-  //     {
-  //       text.push(q)
-  //     }
-  //   }
-  
-  
-  
-
-  // if (generated_questions.length > 0) {
-  //   const new_questions = convertStringToArray(generated_questions)
-  //   let unique_questions = mergeUniqueQuestions(questionArr, new_questions)
-  //   for (q of unique_questions){
-  //     questionArr.push(unique_questions)
-  //   }
-
-  //   }
-  // console.log('full text: ', text)
-  
   return (
-    <div className={styles.chatWindow}>
-      <div className={styles.iconContainer}>
-        <span className="material-icons" style={{ color: "black" }}>
+    <Box className={styles.chatWindow}>
+      <Box className={styles.iconContainer}>
+        <span onClick={handleSignOut} className="material-icons" style={{ color: "black", cursor: "pointer"}}>
           keyboard_arrow_left
         </span>
-        <div className={styles.logo}>
+        <Box className={styles.logo}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="19"
@@ -173,12 +93,12 @@ const Chat = (props) => {
           </svg>
 
           <div className={styles.logotext}>CareSync</div>
-        </div>
+        </Box>
         <span className="material-icons" style={{ color: "black" }}>
           more_horiz
         </span>
-      </div>
-      <div style={{ textAlign: 'center', padding: '20px' }}>
+      </Box>
+      <Box style={{ textAlign: 'center', padding: '20px' }}>
       <ThemeProvider theme={theme}>
 
       <ToggleButtonGroup
@@ -210,8 +130,9 @@ const Chat = (props) => {
           {selectedOption === 'option3' && 'Text for Smart Notes is displayed.'}
         </Typography>
       )}
-    </div>
-    </div>
+    </Box>
+    </Box>
+
   );
 }
 export default Chat;
