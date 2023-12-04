@@ -15,9 +15,11 @@ import DoctorTile from "../doctorTile";
 const ChatAICont = (props) => {
 
     let textArr = [
-        "Hey there! I'm CareSync, your AI sidekick. I'm here to help you get the most out of your appointment. I'll keep track of the conversation, highlight important words, take notes, and even suggest relevant questions to ask the doctor!",
-        "test",
-        "You can ask me anything about what's been discussed in the appointment so far, or about general knowledge.",
+        //"Hey there! I'm CareSync, your AI sidekick. I'm here to help you get the most out of your appointment. I'll keep track of the conversation, highlight important words, take notes, and even suggest relevant questions to ask the doctor!",
+        "How long is the appointment?",
+        "What's the capital of Germany?",
+        "Who is Robert de Niro?",
+        //"You can ask me anything about what's been discussed in the appointment so far, or about general knowledge.",
     ];
 
     const {questionArr} = props
