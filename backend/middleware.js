@@ -14,7 +14,7 @@ module.exports = {
     const { host } = new URL(publicUrl)
     res.setHeader(
       'Content-Security-Policy',
-      `default-src *; style-src 'self' 'unsafe-inline'; script-src * 'self' https://appssdk.zoom.us 'unsafe-inline'; connect-src * 'self' wss://${host}/sockjs-node; img-src 'self' data: https://images.unsplash.com; base-uri 'self'; form-action 'self';`
+      `default-src * blob: ; style-src 'self' 'unsafe-inline'; script-src * 'self' https://appssdk.zoom.us 'unsafe-eval' 'unsafe-inline'  blob: ; connect-src * 'self' wss://${host}/sockjs-node; img-src 'self' data: https://images.unsplash.com; base-uri 'self'; form-action 'self';`
     )
     res.setHeader('Referrer-Policy', 'same-origin')
     res.setHeader('X-Frame-Option', 'same-origin')

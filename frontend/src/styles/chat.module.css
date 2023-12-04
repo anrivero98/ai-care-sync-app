@@ -1,0 +1,114 @@
+/*Container for tabs*/
+
+.logo{
+  display: flex;
+
+  align-items: center;
+  margin: auto;
+}
+
+.logotext{
+  color: var(--light-mode-gray-90, #131619);
+  text-align: center;
+  font-family: Poppins;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px; /* 150% */
+  margin-left: 5px;
+
+}
+
+.tab{
+  color: #3f3f3f;
+font-feature-settings: 'clig' off, 'liga' off;
+font-family: Poppins;
+font-size: 14px;
+font-style: normal;
+font-weight: bold;
+line-height: 22px;
+
+
+
+}
+.tabContainer {
+  display: flex;
+  border-radius: 10px;
+  border:2px solid #d9d9d9;
+  width: 384px;
+  height: 60px;
+  justify-content: space-evenly;
+  align-items: center;
+  /*background-color: orange;*/
+  margin: auto;
+  margin-top: 10px;
+  padding: 15px;
+}
+  
+.iconContainer {
+  display: flex;
+  width: 435px;
+  height: 50px;
+  
+  margin-top: 10px;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 15px;
+}
+  /* Style individual chat messages */
+  .message {
+    display: flex;
+    margin-bottom: 5px;
+    justify-content: flex-end;
+  
+  }
+  
+  /* Style text within each message */
+  .message p {
+    
+    padding: 20px;
+    font-size: 16px;
+    border-radius: 20px;
+    border:2px solid #d9d9d9;
+    background-color: white;
+    max-width: 80%;
+    word-wrap: break-word;
+   
+    color: #323232;
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Poppins;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 26px;
+    margin-bottom: 20px;
+  }
+  
+  
+  
+  /* Style the chat window */
+  .chatWindow {
+    background-color:#fafafa;
+    border-radius: 10px;
+    
+    border: 1px solid #ccc;
+    width: 520px;
+    height: 100vh;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align messages to the bottom */
+    align-items: center;
+    overflow-y: hidden;
+    
+  }
+
+  /*Styling question tile buttons */
+  .buttonContainer {
+    white-space: nowrap; /* Prevents buttons from wrapping to the next line */
+    overflow-x: auto; /* Enables horizontal scrolling if necessary */
+    margin-left: 125px;
+    margin-top: 10px;
+    padding-bottom: 5px;
+  }
+  
